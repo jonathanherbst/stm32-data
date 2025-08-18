@@ -743,4 +743,7 @@ pub static PERIMAP: RegexMap<(&str, &str, &str)> = RegexMap::new(&[
     (".*:XSPI[12]:XSPI:xspi_v2_1H7RS*", ("xspi", "v1", "XSPI")),
     (".*:XSPIM:XSPIM:xspi_v2_1H7RS*", ("xspim", "v1", "XSPIM")),
     ("STM32H7.*:MDMA:.*", ("mdma", "v1", "MDMA")),
+    // DFSDM
+    (".*:DFSDM:.*", ("dfsdm", "v1", "DFSDM")),
+    (".*:DFSDM1:.*", ("dfsdm", "v1", "DFSDM")),
 ]);
