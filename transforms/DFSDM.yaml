@@ -1,0 +1,42 @@
+# transforms the DFSDM from l4p5 dfsdm
+transforms:
+  - !Rename
+    from: ^DFSDM1$
+    to: DFSDM
+
+  - !DeleteEnums
+    from: ^.*(F|IE|IP|EN|START)$
+    bit_size: 1
+
+# specific enums from FLTxCR1
+  - !DeleteEnums
+    from: ^(JSYNC|RCONT|RSYNC|RCH|FAST|AWFSEL)$
+
+# specific enums from FLTxCR2
+  - !DeleteEnums
+    from: ^(EXCH|AWDCH)$
+
+# specific enums from FLTxISR
+  - !DeleteEnums
+    from: ^(SCDF|CKABF)$
+
+# Each dfsdm can have a different number of channels and filter modules
+# Usually there are half as many filters as channels, but not always
+# A bunch of fields change in size depending on the number of channels
+#
+# Fields which have the same number of bits as number of channels
+# ex: 4 ch -> 8 bits, 8 ch -> 8 bits
+# FLTxCR2:AWDCH,EXCH
+# FLT0ISR:SCDF,CKABF
+# FLT0ICR:CLRSCDF,CLRCKABF
+# FLTxJCHGR:JCHG
+# FLTxAWSR:AWLTF,AWHTF
+# FLTxAWCFR:CLRAWHTF,CLRAWLTF
+#
+# Fields which have enough bits to store a channel index
+# ex: 4 ch -> 2 bits, 8 ch -> 3 bits
+# FLTxCR1:RCH
+# FLTxJDATAR:JDATACH
+# FLTxRDATAR:RDATACH
+# FLTxEXMAX:EXMAXCH
+# FLTxEXMIN:EXMINCH
